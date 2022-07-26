@@ -13,7 +13,29 @@
         <div class="box-element product">
             <h6><strong> {{product.name}} </strong></h6>
             <hr>
-            <button data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart">add to cart </button>
+            {% if user.is_authenticated %}
+            <button data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart">add to cart</button>
+            {% else %}
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn">add to cart</button>
+            <!-- Model -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login Or Sign-up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Please Login or create an account to start shopping with us !!
+                    </div><center> 
+                    <div class="modal-footer" style="background-color: #1c5883;">
+                    <a href="{% url 'customers:register' %}" class="btn btn-warning btn-sm">Sign Up</a> <a href="{% url 'customers:login' %}" class="btn btn-outline-warning btn-sm">Sign in</a>      
+                    </div></center>
+                </div>
+                </div>
+            </div>
+
+            {% endif %}
             <a class ="btn btn-outline-success" href ="#">view</a>
             <h4 style = "display: inline-block; float: right;">${{product.price|floatformat:2}}</h4>
             

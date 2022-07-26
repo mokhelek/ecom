@@ -1,0 +1,17 @@
+{% extends "shop/main.html" %}
+{% load bootstrap5 %}
+{% block content %}
+<br>
+<div class="container"> 
+    <form method="post" action="{% url 'customers:register' %}">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+        <button class="btn btn-outline-success btn-sm" name="submit">Register</button>
+        {% endbuttons %}
+     
+    </form>
+</div>
+ 
+{% endblock content %}

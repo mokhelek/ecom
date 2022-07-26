@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'shop',
     'bootstrap5',
+    'customers',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'ecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +127,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = "/images/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'shop/static/images')
+
+LOGIN_URL = 'customers:login'
+LOGOUT_REDIRECT_URL = 'shop:shop'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
