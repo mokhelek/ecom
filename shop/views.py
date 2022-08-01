@@ -1,9 +1,11 @@
 
+from multiprocessing import context
 from django.shortcuts import render
 from . models import *
 from django.http import JsonResponse
 import json
 from django.contrib.auth.decorators import login_required
+from customers.models import *
 
 import datetime
 
@@ -35,7 +37,7 @@ def cart(request):
         order = {'get_cart_total': 0, 'get_cart_items':0 , 'shipping' : False}
         cartItems =order['get_cart_items']
 
-    context ={'items': items, 'order':order, "cartItems":cartItems}
+    context ={'items': items, 'order':order, }
     return render(request, 'shop/cart.html', context)
 @login_required
 def checkout(request):
@@ -90,9 +92,20 @@ def processOrder(request):
          order.save()
          #if order.shipping ==True :
 
-
-
      else:
          print("user is not logged in ..")
 
      return JsonResponse('payment complete', safe = False)
+ 
+def posts(request):
+    posts = Blog.objects.all().order_by("-date_created")
+    
+    context = {"posts":posts}
+     
+    return render(request,"shop/blog_list.html",context)
+
+def read_post(request,post_id):
+    read_post = Blog.objects.get(id = post_id)
+    context = {"read_post":read_post}
+    
+    return render(request,"shop/read_post.html",context)

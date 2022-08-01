@@ -11,4 +11,7 @@ urlpatterns = [
 
     path("update_item/", views.updateItem, name ="update_Item"),
     path("process_order/", views.processOrder, name ="update_Item"),
+    
+    path("posts/", views.posts, name ="posts"),
+    path("read_post/<int:post_id>/", views.read_post, name ="read_post"),
 ]

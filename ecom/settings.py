@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9_gf6c^%3emfco^*co42*xlzgy#k16@+n9nfbes!ru!=8x&)w@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'shop',
+    'shop.apps.ShopConfig',
+    'customers.apps.CustomersConfig',
+    
+    
     'bootstrap5',
-    'customers',
+    'tinymce',
+    
 ]
 
 MIDDLEWARE = [
@@ -67,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'shop.context_processors.cartItems',
             ],
         },
     },
@@ -130,6 +135,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'shop/static/images')
 
 LOGIN_URL = 'customers:login'
 LOGOUT_REDIRECT_URL = 'shop:shop'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    #'selector': 'textarea',
+    'theme': "silver",
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            bold italic underline |fontselect|fontsizeselect| forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | 
+            | link image | codesample |
+            ''',
+    'toolbar2': '''
+            |charmap hr  |  code | indent outdent | bullist numlist | |preview |"preview"
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

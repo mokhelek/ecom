@@ -1,0 +1,34 @@
+{% extends 'shop/main.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+<br>
+<div class="container"> 
+
+
+   
+   <div class="row">  
+      {% for post in posts %}
+      <div class="col col-sm-4">  
+         <div class="card card-body" style="margin-bottom: 0.4cm;box-shadow:3px 3px 3px rgb(194, 194, 194)"> 
+            <div class="img-wrapper" style="overflow:hidden;height: 230px;"> 
+               <img class="img-thumbnail" src="{{post.thumbnail.url}}">
+
+            </div>
+
+            <h2> <strong>{{post.title}} </strong> </h2>
+            <h4>{{post.subtitle}}</h4>
+            <a style="text-decoration: none;" href="{% url 'shop:read_post' post.id %}"><h5 style="color: rgb(8, 66, 253);"> Read More ...</h5></a>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+   
+
+
+
+</div>
+{% endblock content %}
