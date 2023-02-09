@@ -2,6 +2,29 @@ body{
 	background-color: hsl(0, 0%, 98%);
 }
 
+
+header{
+	height: 60px;
+	box-shadow: 0 0 6px rgb(221, 221, 221);
+	background-color: rgb(255, 255, 255);
+	
+}
+#navigation{
+
+	margin-top: 0.5rem;
+	list-style: none;
+}
+#profile{
+	display: flex;
+	margin-top: 0.5rem;
+	list-style: none;
+}
+
+
+
+
+
+
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
 }

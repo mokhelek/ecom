@@ -11,13 +11,15 @@
 
     @media screen and (max-width:575px) {
         #product-title{
-            font-size: 1.1rem !important;
+            font-size: 1rem !important;
         }
-        #product-title{
+        #product-price{
             font-size: 0.85rem !important;
+            font-weight: 500 !important;
+            margin: 5px !important;
         }
         #title-wrapper{
-            height: 2rem;
+            height: 2.2rem;
         }
         #product-card{
             height: 130px;
@@ -45,7 +47,7 @@
                 <div class="d-none d-sm-block">
                     <div class="row">
                         <div class="col-7 col-sm-8">
-                            <p id="product-title"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
+                            <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
                         </div>
                         <div class="col-5 col-sm-4">
                             {% if user.is_authenticated %}
@@ -71,14 +73,14 @@
 
                     <div class="row">
                         <div class="col">
-                            <p id="product-title" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
+                            <p id="product-price" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
                         </div>
                     
                     </div>
                     <div class="row">
                         
                             {% if user.is_authenticated %}
-                            <button style="width: 100%;background-color: #fffaf5;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm rounded-pill  ">
+                            <button style="width: 100%;background-color: #fffaf54d;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm rounded-pill  ">
                                 <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
                                 +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
