@@ -3,23 +3,6 @@ body{
 }
 
 
-header{
-	height: 60px;
-	box-shadow: 0 0 6px rgb(221, 221, 221);
-	background-color: rgb(255, 255, 255);
-	
-}
-#navigation{
-
-	margin-top: 0.5rem;
-	list-style: none;
-}
-#profile{
-	display: flex;
-	margin-top: 0.5rem;
-	list-style: none;
-}
-
 
 
 
