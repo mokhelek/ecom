@@ -12,6 +12,7 @@ import datetime
 # Create your views here.
 def shop(request):
     if request.user.is_authenticated:  #if user has logged in ...!
+        ads = Headline.objects.all()
         customer = request.user.customer
         order , created = Order.objects.get_or_create(customer = customer, complete = False)
         items = order.orderitem_set.all()  # I HAVE SEEN THIS NOTATION SEVERAL TIMES
@@ -22,7 +23,7 @@ def shop(request):
         cartItems =order['get_cart_items']
 
     products = Product.objects.all()
-    context ={'products':products , 'cartItems':cartItems}
+    context ={'products':products , 'cartItems':cartItems,"ads":ads}
     return render(request, 'shop/shop.html', context)
 @login_required
 def cart(request):

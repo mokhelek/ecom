@@ -8,14 +8,24 @@ from tinymce.models import HTMLField
 # Create your models here.
 
 
+class Category(models.Model):
+    category_name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.category_name
+
+
 class Product(models.Model):
+    image = models.ImageField(null=True, blank=True)
     name = models.CharField(max_length = 200, null = True )
     price = models.FloatField()
+    description = models.TextField( default="product description not provided")
+    category = models.ForeignKey(Category,on_delete=models.CASCADE, null =True , blank =True)
     digital = models.BooleanField(default = False ,null =True , blank =False)
-    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+
     @property
     def imageURL(self):
         try:
@@ -35,4 +45,9 @@ class Blog(models.Model):
         return str(self.title)
 
     
+class Headline(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(null=True,blank=True)
 
+    def __str__(self):
+        return self.title
