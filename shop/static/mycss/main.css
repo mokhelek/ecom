@@ -2,27 +2,6 @@ body{
 	background-color: hsl(0, 0%, 98%);
 }
 
-#product-img{
-	height: 150px;
-}
-
-h1,h2,h3,h4,h5,h6{
-	color:hsl(0, 0%, 22%);
-}
-
-
-
-@media screen and (max-width:550px)	{
-	#featured-product{
-		width:8.5rem !important;
-	}	
-	#product-img{
-		height: 80px;
-	}
-	#featured-container{
-		width:100% !important;
-	}
-}
 
 #cart-icon{
 	width:25px;
