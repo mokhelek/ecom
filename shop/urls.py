@@ -14,4 +14,5 @@ urlpatterns = [
     
     path("posts/", views.posts, name ="posts"),
     path("read_post/<int:post_id>/", views.read_post, name ="read_post"),
+    path("viewCategory/<int:category_id>/", views.viewCategory, name ="viewCategory"),
 ]
