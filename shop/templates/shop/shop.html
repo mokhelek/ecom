@@ -64,7 +64,7 @@
 <br>
 
 
-<div  class="container-fluid" style="width: 95%;">
+<div  class="container-fluid" style="width: 100%;">
         <a class="btn btn-outline-success btn-sm" style="display: inline-flex;float:right;margin-bottom: 15px;" href="#">  view all  </a>
         <h5 style="margin-bottom: 15px;"> <strong>  Featured Products </strong> </h5>
 
@@ -72,7 +72,7 @@
     <div class="d-flex">
         {%  for product in products %}
         <div style="border-radius: 0px;margin-bottom: 15px;margin-left:0px !important;margin-right:0px !important;"  class="col">
-            <div id="featured-product" style="border-radius: 0px;width: 17rem;" class="card">
+            <div id="featured-product" style="border-radius: 0px;width: 19rem;" class="card">
 
             <img id="product-img"  style="border-radius: 0px" class = "img-fluid" src = "{{ product.imageURL }}">
                 
@@ -238,7 +238,7 @@
 
 
 
-<div class="container-fluid" style="width: 95%;">     
+<div style="width: 100%;">     
 
         {% for i in categories %}
         <div style="margin-top: 1.5rem;">
@@ -432,21 +432,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Model -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -469,6 +454,85 @@
 
 
 
+<script>
+
+
+
+    var updateBtns = document.getElementsByClassName('update-cart')
+    for (i = 0; i < updateBtns.length; i++) {
+      updateBtns[i].addEventListener('click', function(){
+        var productId = this.dataset.product
+        var action = this.dataset.action
+    
+        if (user == 'AnonymousUser'){
+          console.log('This user is not LOGGED IN')
+          addCookieItem(productId, action)
+        }else{
+          updateUserOrder(productId, action)
+        }
+      })
+    }
+    function updateUserOrder(productId, action){
+        var url = '/update_item/'
+        fetch(url, {
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+          }, 
+          body:JSON.stringify({'productId':productId, 'action':action})
+        })
+        .then((response) => {
+           return response.json();
+        })
+        .then((data) => {
+            console.log('data:' , data)
+          location.reload()
+        });
+    }
+    function addCookieItem(productId, action){
+      console.log('User is not authenticated')
+    
+      if (action == 'add'){
+        if (cart[productId] == undefined){
+        cart[productId] = {'quantity':1}
+    
+        }else{
+          cart[productId]['quantity'] += 1
+        }
+      }
+    
+      if (action == 'remove'){
+        cart[productId]['quantity'] -= 1
+    
+        if (cart[productId]['quantity'] <= 0){
+          console.log('Item should be deleted')
+          delete cart[productId];
+        }
+      }
+      console.log('CART:', cart)
+      document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      
+      location.reload()
+    }
+    
+    
+    
+    function searchBar(){
+      let searchbar = document.getElementById("searchbar")
+    
+      if (searchbar.style.display == "none"){
+        searchbar.style.display = "block";
+      }else{
+        searchbar.style.display = "none";
+      }
+    
+    
+    }
+    
+    
+ </script>
+    
 
 
 
