@@ -42,7 +42,7 @@
             <div class="carousel-item">
             {% endif  %}
 
-            <img style="height: 400px;"  src="{{i.image.url}}" class="d-block w-100" alt="...">
+            <img id="carousel-image" style="height: 400px;"  src="{{i.image.url}}" class="d-block w-100" alt="...">
             </div>
 
         {% endfor %}
@@ -59,20 +59,293 @@
     </button>
  
 </div>
+<br>
+
+
+
 
 
 <br>
 
+<center>
 
-<div  class="container-fluid" style="width: 100%;">
+
+<div class="col-12 col-md-8">
+
+
+    <div class="row">
+        <div class="col-4">
+            <div  id="categories" class="d-flex align-items-center justify-content-center"  style="height: 130px;width:130px;background-color: #1c5883;border-radius: 50%;">
+                <div >
+                    <h6 style="color:#c7c4c49f" > Sale  </h6>
+                    <h6 style="color:#f5f5f5;font-weight: 600;" >  40% off  </h6>
+                </div>
+               
+            </div>
+        </div>
+    
+        <div class="col-4">
+            <div  id="categories" class="d-flex align-items-center justify-content-center"  style="height: 130px;width:130px;background-color: #1c5883;border-radius: 50%;">
+                <div >
+                    <h6 style="color:#c7c4c49f" > Sale  </h6>
+                    <h6 style="color:#f5f5f5;font-weight: 600;" >  40% off  </h6>
+                </div>
+               
+            </div>
+        </div>
+    
+        <div class="col-4">
+            <div  id="categories" class="d-flex align-items-center justify-content-center"  style="height: 130px;width:130px;background-color: #1c5883;border-radius: 50%;">
+                <div >
+                    <h6 style="color:#c7c4c49f" > Sale  </h6>
+                    <h6 style="color:#f5f5f5;font-weight: 600;" >  40% off  </h6>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+</center>
+
+
+
+
+
+
+
+
+
+
+<div id="container" class="container-fluid d-none" style="width: 100%;">
         <a class="btn btn-outline-success btn-sm" style="display: inline-flex;float:right;margin-bottom: 15px;" href="#">  view all  </a>
-        <h5 style="margin-bottom: 15px;"> <strong>  Featured Products </strong> </h5>
+        <h5 style="margin-bottom: 15px;"> <strong>  Featured Products </strong> </h5>  
 
-<div style="width: 100%;overflow-x: scroll;" class="row d-block d-lg-none">
+
+        
+        <div class="row">
+            {% for product in products %}
+                {% if product.featured == True  %}
+                    <div class="col-4">
+
+         
+                        <div  style="border-radius: 0px;" class="card">
+        
+                            <img id="product-img" class = "img-fluid" src = "{{ product.imageURL }}">
+                                
+                            <div style="width:17rem" class="card-body">
+                                <hr style="margin: 5px;">
+                                <div   id="title-wrapper">
+                                    <h5 id="product-title"   style="color:#2c2c2c"><strong> {{product.name}} </strong></h5>
+                                </div>
+                                <p class="d-none d-md-block" style="color:#838383;font-size:0.95rem">Lorem ipsum dolor sit amet consectetur adipisicing...</p>
+            
+            
+                                <div class="d-none d-sm-block">
+                                    <div class="row">
+                                        <div class="col-7 col-sm-8">
+                                            <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
+                                        </div>
+                                        <div class="col-5 col-sm-4">
+                                            {% if user.is_authenticated %}
+                                            <button style="width: 60px;border: 1px #ffba61 solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm ">
+                                                <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                                +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                </svg>
+                                                </h6>
+                                            </button>
+                                            {% else %}
+                                            <button style="width: 60px;border: 1px #ff9f20a9 solid" data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn btn-sm"> 
+                                                <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                    </svg>
+                                                    </h6>
+                                            </button
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="d-block  d-sm-none">
+            
+                                    <div class="row">
+                                        <div class="col">
+                                            <p id="product-price" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="row">
+                                      
+                                {% if user.is_authenticated %}
+                                <button style="width: 60px;border: 1px #ffba61 solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm ">
+                                    <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    </h6>
+                                </button>
+                                {% else %}
+                                <button style="width: 60px;border: 1px #ff9f20a9 solid" data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn btn-sm"> 
+                                    <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                        +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg>
+                                        </h6>
+                                </button
+                                {% endif %}
+                                    
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+    
+                    
+                        
+                    </div>
+                {% endif  %} 
+            {% endfor %}
+        </div>
+</div>
+
+
+<!--  ***************************************************************** CATEGORIES *******************************************************************  -->
+
+<br>
+
+
+
+
+
+<div id="container" style="margin: 0 15px 0 15px ;" >     
+
+        {% for i in categories %}
+
+        
+
+        <div  class="row"  >
+            <div class="col-8  col-sm-10 col-lg-11 ">
+                 <h5 style="margin:10px 0px 5px 5px;" > <strong>  {{i.category_name|title}} </strong> </h5>
+            </div>
+
+
+
+
+            <div class="col-4  col-sm-2 col-lg-1 ">
+                 <a style="margin:10px 0px 5px 5px;" class="btn btn-success btn-sm" href="{% url 'shop:viewCategory' i.id %}">  view all  </a>
+            </div>
+         </div>
+
+        <div class="d-none d-lg-block">
+
+
+
+            <div  class="row ">
+                {%  for product in i.product_set.all %}
+                {% if forloop.counter <= 4 %}
+                <div style="border-radius: 0px;"  class="col-3">
+
+                    <div  style="border-radius: 0px;" class="card">
+        
+                        <img id="product-img" class = "img-fluid" src = "{{ product.imageURL }}">
+                            
+                        <div style="width:17rem" class="card-body">
+                            <hr style="margin: 5px;">
+                            <div   id="title-wrapper">
+                                <h5 id="product-title"   style="color:#2c2c2c"><strong> {{product.name}} </strong></h5>
+                            </div>
+                            <p class="d-none d-md-block" style="color:#838383;font-size:0.95rem">Lorem ipsum dolor sit amet consectetur adipisicing...</p>
+        
+        
+                            <div class="d-none d-sm-block">
+                                <div class="row">
+                                    <div class="col-7 col-sm-8">
+                                        <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
+                                    </div>
+                                    <div class="col-5 col-sm-4">
+                                        {% if user.is_authenticated %}
+                                        <button style="width: 60px;border: 1px #ffba61 solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm ">
+                                            <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                            </svg>
+                                            </h6>
+                                        </button>
+                                        {% else %}
+                                        <button style="width: 60px;border: 1px #ff9f20a9 solid" data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn btn-sm"> 
+                                            <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                                +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                </svg>
+                                                </h6>
+                                        </button
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="d-block  d-sm-none">
+        
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="product-price" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
+                                    </div>
+                                
+                                </div>
+                                <div class="row">
+                                  
+                            {% if user.is_authenticated %}
+                            <button style="width: 60px;border: 1px #ffba61 solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm ">
+                                <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </svg>
+                                </h6>
+                            </button>
+                            {% else %}
+                            <button style="width: 60px;border: 1px #ff9f20a9 solid" data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn btn-sm"> 
+                                <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ffba61;">
+                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                    </svg>
+                                    </h6>
+                            </button
+                            {% endif %}
+                                
+                                </div>
+        
+                            </div>
+                        </div>
+        
+                    </div>
+
+
+                </div>
+                {% endif %}
+                {% endfor %}
+        </div>  
+
+
+</div>
+   
+
+
+
+
+
+
+
+
+<div   id="container" style=" width: 98%  ;overflow-x: scroll;" class="d-block d-lg-none">
     <div class="d-flex">
-        {%  for product in products %}
-        <div style="border-radius: 0px;margin-bottom: 15px;margin-left:0px !important;margin-right:0px !important;"  class="col">
-            <div id="featured-product" style="border-radius: 0px;width: 19rem;" class="card">
+        {%  for product in i.product_set.all %}
+        <div style=" margin-bottom: 15px;  "  >
+            <div id="featured-product" style="width:17rem"  class="card">
 
             <img id="product-img"  style="border-radius: 0px" class = "img-fluid" src = "{{ product.imageURL }}">
                 
@@ -92,20 +365,22 @@
                             <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
                         </div>
                         <div class="col-5 col-sm-4">
+                          
                             {% if user.is_authenticated %}
-                            <button style="width: 70px;background-color: #fffaf5;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm rounded-pill  ">
-                                <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <button style="width: 100%;border: 1px #feba61 solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm ">
+                                <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ff9f20a9">
+                                +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                  </svg>
+                                    </svg>
                                 </h6>
                             </button>
                             {% else %}
-                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
+                            <button style="width: 100%;border: 1px #feba61 solid" data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn btn-sm"> 
                                 +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                  </svg>
-                            </button>
+                                    </svg>
+                                </h6>
+                            </button
                             {% endif %}
                         </div>
                     </div>
@@ -122,310 +397,105 @@
                     <div class="row">
                         
                             {% if user.is_authenticated %}
-                            <button style="width: 100%;background-color: #fffaf54d;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm rounded-pill  ">
-                                <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <button style="width: 100%;border: 1px #feba61 solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm ">
+                                <h6 style="font-weight: 600;font-size: 1rem;margin: 0px;color: #ff9f20a9">
+                                +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                  </svg>
+                                    </svg>
                                 </h6>
                             </button>
                             {% else %}
-                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
+                            <button style="width: 100%;border: 1px #feba61 solid" data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn btn-sm"> 
                                 +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                  </svg>
-                            </button>
+                                    </svg>
+                                </h6>
+                            </button
                             {% endif %}
-                       
-                    </div>
-
-                </div>
-            </div>
-
-            </div>
-        </div>  &nbsp;&nbsp;&nbsp;
-        {% endfor %}
-    </div>
-</div>
-
-
-<div class="d-none d-lg-block">
-    <div  class="row ">
-        {%  for product in products %}
-        {% if forloop.counter <= 4 %}
-        <div style="border-radius: 0px;"  class="col-3">
-            <div  style="border-radius: 0px;" class="card">
-
-                <img class = "img-fluid" src = "{{ product.imageURL }}">
-                    
-                <div style="background-color: #ffffffbf" class="card-body">
-                    <hr style="margin: 5px;">
-                    <div   id="title-wrapper">
-                        <h5 id="product-title"   style="color:#2c2c2c"><strong> {{product.name}} </strong></h5>
-                    </div>
-                    <p class="d-none d-md-block" style="color:#838383;font-size:0.95rem">Lorem ipsum dolor sit amet consectetur adipisicing...</p>
-
-
-                    <div class="d-none d-sm-block">
-                        <div class="row">
-                            <div class="col-7 col-sm-8">
-                                <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
-                            </div>
-                            <div class="col-5 col-sm-4">
-                                {% if user.is_authenticated %}
-                                <button style="width: 70px;background-color: #fffaf5;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm rounded-pill  ">
-                                    <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                    </svg>
-                                    </h6>
-                                </button>
-                                {% else %}
-                                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
-                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                    </svg>
-                                </button>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-block  d-sm-none">
-
-                        <div class="row">
-                            <div class="col">
-                                <p id="product-price" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
-                            </div>
                         
-                        </div>
-                        <div class="row">
-                            
-                                {% if user.is_authenticated %}
-                                <button style="width: 100%;background-color: #fffaf54d;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm rounded-pill  ">
-                                    <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                    </svg>
-                                    </h6>
-                                </button>
-                                {% else %}
-                                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
-                                    +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                    </svg>
-                                </button>
-                                {% endif %}
-                        
-                        </div>
-
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>  
-        {% endif %}
-        {% endfor %}
-    </div>
-</div>
 
-
-<!--  ***************************************************************** CATEGORIES *******************************************************************  -->
-
-<br>
-
-
-
-
-
-<div style="width: 100%;">     
-
-        {% for i in categories %}
-        <div style="margin-top: 1.5rem;">
-            <a class="btn btn-success btn-sm" style="display: inline-flex;float:right;margin-bottom: 15px;" href="{% url 'shop:viewCategory' i.id %}">  view all  </a>
-            <h4 style="margin-bottom: 15px;"> <strong>  {{i.category_name|title}} </strong> </h4>
-        </div>
-
-
-
-        <div class="d-none d-lg-block">
-            <div  class="row ">
-                {%  for product in i.product_set.all %}
-                {% if forloop.counter <= 4 %}
-                <div style="border-radius: 0px;"  class="col-3">
-                    <div  style="border-radius: 0px;" class="card">
-        
-                        <img id="product-img" class = "img-fluid" src = "{{ product.imageURL }}">
-                            
-                        <div style="background-color: #ffffffbf" class="card-body">
-                            <hr style="margin: 5px;">
-                            <div   id="title-wrapper">
-                                <h5 id="product-title"   style="color:#2c2c2c"><strong> {{product.name}} </strong></h5>
-                            </div>
-                            <p class="d-none d-md-block" style="color:#838383;font-size:0.95rem">Lorem ipsum dolor sit amet consectetur adipisicing...</p>
-        
-        
-                            <div class="d-none d-sm-block">
-                                <div class="row">
-                                    <div class="col-7 col-sm-8">
-                                        <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
-                                    </div>
-                                    <div class="col-5 col-sm-4">
-                                        {% if user.is_authenticated %}
-                                        <button style="width: 70px;background-color: #fffaf5;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm rounded-pill  ">
-                                            <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                            </svg>
-                                            </h6>
-                                        </button>
-                                        {% else %}
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                            </svg>
-                                        </button>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-        
-                            <div class="d-block  d-sm-none">
-        
-                                <div class="row">
-                                    <div class="col">
-                                        <p id="product-price" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
-                                    </div>
-                                
-                                </div>
-                                <div class="row">
-                                    
-                                        {% if user.is_authenticated %}
-                                        <button style="width: 100%;background-color: #fffaf54d;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm rounded-pill  ">
-                                            <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                            </svg>
-                                            </h6>
-                                        </button>
-                                        {% else %}
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                            </svg>
-                                        </button>
-                                        {% endif %}
-                                
-                                </div>
-        
-                            </div>
-                        </div>
-        
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
             </div>  
-
-
+        </div>&nbsp;&nbsp;
+        {% endfor %}
+    </div>
+ 
 </div>
-   
 
-
-
-
-
-
-
-
-            <div style="width: 100%;overflow-x: scroll;" class="d-block d-lg-none">
-                <div class="d-flex">
-                    {%  for product in i.product_set.all %}
-                    <div style="border-radius: 0px;margin-bottom: 15px;margin-left:0px !important;margin-right:0px !important;"  class="">
-                        <div id="featured-product" style="border-radius: 0px;width: 17rem;" class="card">
             
-                        <img id="product-img"  style="border-radius: 0px" class = "img-fluid" src = "{{ product.imageURL }}">
-                            
-                        <div style="background-color: #ffffffbf" id="product-cars" class="card-body">
-                            <hr style="margin: 5px;">
-                            <div   id="title-wrapper">
-                                <h5 id="product-title"   style="color:#2c2c2c"><strong> {{product.name}} </strong></h5>
-                            </div>
-                            <p class="d-none d-md-block" style="color:#838383;font-size:0.95rem">Lorem ipsum dolor sit amet consectetur adipisicing...</p>
-            
-            
-            
-            
-                            <div class="d-none d-sm-block">
-                                <div class="row">
-                                    <div class="col-7 col-sm-8">
-                                        <p id="product-price"  style = "font-size: 1.2rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
-                                    </div>
-                                    <div class="col-5 col-sm-4">
-                                        {% if user.is_authenticated %}
-                                        <button style="width: 70px;background-color: #fffaf5;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary  update-cart btn-sm rounded-pill  ">
-                                            <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                              </svg>
-                                            </h6>
-                                        </button>
-                                        {% else %}
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                              </svg>
-                                        </button>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <div class="d-block  d-sm-none">
-            
-                                <div class="row">
-                                    <div class="col">
-                                        <p id="product-price" style = "font-size: 1rem;font-weight: 600;color:#444444">R{{product.price|floatformat:2}}</p>
-                                    </div>
-                                
-                                </div>
-                                <div class="row">
-                                    
-                                        {% if user.is_authenticated %}
-                                        <button style="width: 100%;background-color: #fffaf54d;border: 1.2px #fa920a solid"  data-product ={{product.id}} data-action="add" class ="btn btn-outline-secondary add-btn update-cart btn-sm rounded-pill  ">
-                                            <h6 style="font-weight: 600;font-size: 1.2rem;margin: 0px;color: #fa920a;">
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                              </svg>
-                                            </h6>
-                                        </button>
-                                        {% else %}
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class ="btn btn-outline-secondary add-btn"> 
-                                            +   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                              </svg>
-                                        </button>
-                                        {% endif %}
-                                   
-                                </div>
-            
-                            </div>
-                        </div>
-            
-                        </div>
-                    </div>  &nbsp;&nbsp;
-                    {% endfor %}
-                </div>
-            </div>
-            
-            
-
+{% endfor  %}
 
      
         
-        {% endfor  %}
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

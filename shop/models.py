@@ -22,7 +22,8 @@ class Product(models.Model):
     description = models.TextField( default="product description not provided")
     category = models.ForeignKey(Category,on_delete=models.CASCADE, null =True , blank =True)
     digital = models.BooleanField(default = False ,null =True , blank =False)
-
+    featured = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.name
 

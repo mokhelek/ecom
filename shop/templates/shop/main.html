@@ -11,7 +11,7 @@
     <meta name = "viewport" content ="width=device-width, initial-scale =1 ,maximum-scale =1, minimum-scale =1"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel='stylesheet' type='text/css'  href="{% static 'mycss/main.css' %}">
+    <link rel='stylesheet' type='text/css'  href="{% static 'css/main.css' %}">
 
     <script type = "text/javascript">
           var user ='{{request.user}}'
@@ -39,49 +39,7 @@
 {% url 'shop:posts' as posts_path %}
 {% url 'shop:read_post' "%d" as read_post_path %}
 
-<style>
 
-header{
-	height: 60px;
-	box-shadow: 0 0 6px rgb(221, 221, 221);
-	background-color: rgb(255, 255, 255);
-	
-}
-#navigation{
-
-	margin-top: 0.5rem;
-	list-style: none;
-}
-#profile{
-	display: flex;
-	margin-top: 0.5rem;
-	list-style: none;
-}
-
-
-#product-img{
-	height: 150px;
-}
-
-h1,h2,h3,h4,h5,h6{
-	color:hsl(0, 0%, 22%);
-}
-
-
-
-@media screen and (max-width:550px)	{
-	#featured-product{
-		width:8.5rem !important;
-	}	
-	#product-img{
-		height: 80px;
-	}
-	#featured-container{
-		width:100% !important;
-	}
-}
-
-</style>
 
 <header class="sticky-top"  >
 
