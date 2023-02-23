@@ -25,30 +25,126 @@
 			<br>
 			<div class="box-element">
 				<div class="cart-row">
-					<div style="flex:2"></div>
+					<div style="flex:1"></div>
 					<div style="flex:2"><strong>Item</strong></div>
-					<div style="flex:1"><strong>Price</strong></div>
 					<div style="flex:1"><strong>Quantity</strong></div>
-					<div style="flex:1"><strong>Total</strong></div>
+					<div style="flex:2"><strong>Price</strong></div>
+				
 				</div>
 				{% for item in items %}
 				<div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>R{{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:1"><img class="row-image img-fluid " src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p style="font-size: 0.9rem;margin-left: 10px;">{{item.product.name}}</p></div>
 					<div style="flex:1">
-						<p class="quantity">{{item.quantity}}</p>
-						<div class="quantity">
-							<img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
-					
-							<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+						
+						<div class="d-flex">
+							<img style="width: 0.9rem;"	data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/dash-square.svg' %}">
+							&nbsp;&nbsp; <p style="margin-top: 15px;"	class="">{{item.quantity}}</p> &nbsp;&nbsp;
+							<img style="width: 0.9rem;" data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/plus-square.svg' %}">
+							
 						</div>
 					</div>
-					<div style="flex:1"><p>R{{item.get_total|floatformat:2}}</p></div>
+					<div style="flex:1"><p style="font-size: 0.9rem;" >R{{item.get_total|floatformat:2}}</p></div>
 				</div>
 				{% endfor %}
 			</div>
 		</div>
 	</div>
 	</div>
+
+
+
+
+
+
+
+
+	<script>
+
+
+
+		var updateBtns = document.getElementsByClassName('update-cart')
+		for (i = 0; i < updateBtns.length; i++) {
+		  updateBtns[i].addEventListener('click', function(){
+			var productId = this.dataset.product
+			var action = this.dataset.action
+		
+			if (user == 'AnonymousUser'){
+			  console.log('This user is not LOGGED IN')
+			  addCookieItem(productId, action)
+			}else{
+			  updateUserOrder(productId, action)
+			}
+		  })
+		}
+		function updateUserOrder(productId, action){
+			var url = '/update_item/'
+			fetch(url, {
+			  method:'POST',
+			  headers:{
+				'Content-Type':'application/json',
+				'X-CSRFToken':csrftoken,
+			  }, 
+			  body:JSON.stringify({'productId':productId, 'action':action})
+			})
+			.then((response) => {
+			   return response.json();
+			})
+			.then((data) => {
+				console.log('data:' , data)
+			  location.reload()
+			});
+		}
+		function addCookieItem(productId, action){
+		  console.log('User is not authenticated')
+		
+		  if (action == 'add'){
+			if (cart[productId] == undefined){
+			cart[productId] = {'quantity':1}
+		
+			}else{
+			  cart[productId]['quantity'] += 1
+			}
+		  }
+		
+		  if (action == 'remove'){
+			cart[productId]['quantity'] -= 1
+		
+			if (cart[productId]['quantity'] <= 0){
+			  console.log('Item should be deleted')
+			  delete cart[productId];
+			}
+		  }
+		  console.log('CART:', cart)
+		  document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		  
+		  location.reload()
+		}
+		
+		
+		
+		function searchBar(){
+		  let searchbar = document.getElementById("searchbar")
+		
+		  if (searchbar.style.display == "none"){
+			searchbar.style.display = "block";
+		  }else{
+			searchbar.style.display = "none";
+		  }
+		
+		
+		}
+		
+		
+	 </script>
+		
+	
+	
+	
+
+
+
+
+
+
 {% endblock content %}
